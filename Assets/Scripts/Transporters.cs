@@ -69,6 +69,12 @@ public class Transporters : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     public void OnPointerUp(PointerEventData eventData)
     {
         List<Collider2D> collider = Physics2D.OverlapCircleAll(transform.position, distMax).ToList();
+        if (Physics2D.OverlapCircle(transform.position, 0.6f, 1 << 0))
+        {
+            transform.position = originalPosition;
+            pathfinding.enabled = true;
+            return;
+        }
         foreach (Collider2D col in collider.Where(x => x.TryGetComponent<Cell>(out Cell trash)))
         {
 
@@ -82,6 +88,6 @@ public class Transporters : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
             }
         }
         transform.position = originalPosition;
-        pathfinding.enabled=true;
+        pathfinding.enabled = true;
     }
 }

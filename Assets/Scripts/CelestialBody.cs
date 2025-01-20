@@ -7,7 +7,7 @@ using UnityEngine.Rendering.Universal;
 
 public class CelestialBody : MonoBehaviour
 {
-    public float gravityForce;
+    public float weight;
     [SerializeField] float intensityOffset=1;
 
     private void Start()

@@ -16,6 +16,7 @@ public class CellAttraction : MonoBehaviour
     float timer = 0;
     bool increment=true;
     private float ThrustMagnitude;
+    private GameObject actualPixel;
 
     void Start()
     {
@@ -28,18 +29,8 @@ public class CellAttraction : MonoBehaviour
 
     private void FixedUpdate()
     {
-        appliedGravity=Vector2.zero;
-        foreach (var planet in attraction)
-        {
-            Vector2 targetDirection = planet.transform.position - transform.position;
-            targetDirection = targetDirection.normalized; // Normalize target direction vector
-            targetDirection*=planet.gravityForce;
-            //Quaternion rotation = Quaternion.FromToRotation(planet.gravity, targetDirection);
-            //Vector2 rotatedFrom = rotation * planet.gravity;
-            appliedGravity += targetDirection;
-            
-        }
-        Thrust = Vector2.ClampMagnitude(-appliedGravity, maxThrust);
+        appliedGravity = GetAttractionValue();
+        Thrust = Vector2.ClampMagnitude(-(appliedGravity+ rb.velocity), maxThrust);
         float angle = Mathf.Atan2(Thrust.y, Thrust.x) * Mathf.Rad2Deg;
         pivot.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         Vector2 scaleOfProp = new Vector2(Thrust.magnitude / maxThrust, Thrust.magnitude / maxThrust);
@@ -62,23 +53,32 @@ public class CellAttraction : MonoBehaviour
         }
 
         ThrustMagnitude=Thrust.magnitude;
-        rb.AddForce(rb.mass *(appliedGravity+Thrust),ForceMode2D.Force);
+        rb.AddForce((appliedGravity+Thrust),ForceMode2D.Force);
 
     }
-    private void OnTriggerEnter2D(Collider2D collision)
+
+    private Vector2 GetAttractionValue()
     {
-        if (collision.TryGetComponent<CelestialBody>(out CelestialBody planet))
+        if (transform.position.x >= 256)
         {
-            if (!attraction.Contains(planet))
-            attraction.Add(planet);
+            return Vector2.left * 100;
         }
-    }
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.TryGetComponent<CelestialBody>(out CelestialBody planet))
+
+        if (transform.position.x < 0)
         {
-            if (!attraction.Contains(planet))
-            attraction.Remove(planet);
+            return Vector2.right * 100;
         }
+
+        if (transform.position.y >= 240)
+        {
+            return Vector2.down * 100;
+        }
+
+        if (transform.position.y < 0)
+        {
+            return Vector2.up * 100;
+        }
+        return S_GravityMap.pixelsForce[(int)transform.position.x][(int)transform.position.y];
+
     }
 }

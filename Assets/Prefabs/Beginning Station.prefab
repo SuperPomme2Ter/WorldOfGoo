@@ -121,7 +121,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 1.5
+  m_Radius: 50
 --- !u!50 &8665289326948062800
 Rigidbody2D:
   serializedVersion: 4
@@ -162,7 +162,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   connections: []
-  maxDistance: 1.5
+  maxDistance: 50
   spriteScale: 0.5
   linkMaterial: {fileID: 2100000, guid: 19979837cc36ec54b83d4ab8605ef50e, type: 2}
   nbTransporters: 10
