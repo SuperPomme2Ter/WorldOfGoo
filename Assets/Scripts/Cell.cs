@@ -12,6 +12,9 @@ public class Cell : MonoBehaviour
     public float maxDistance;
     public float spriteScale;
     public Material linkMaterial;
+    [SerializeField] private float springFrequency=1.5f;
+    [Range(0,1)]
+    [SerializeField] private float springDamping=1;
 
     public void LinkToAnotherCell(Cell anotherCell)
     {
@@ -41,10 +44,10 @@ public class Cell : MonoBehaviour
         else
             Debug.LogError(name + "'s Line Renderer has no material!");
         newConnection.connectedBody = anotherCell.GetComponent<Rigidbody2D>();
-        newConnection.dampingRatio = 1;
+        newConnection.dampingRatio = springDamping;
         newConnection.distance = maxDistance;
-        newConnection.frequency = 1.5f;
-        anotherCell.connections.Add(this.gameObject);
+        newConnection.frequency = springFrequency;
+        anotherCell.connections.Add(gameObject);
         connections.Add(anotherCell.gameObject);
         LinkUpdater updater = linkGameobject.AddComponent<LinkUpdater>();
         updater.station1 = gameObject;

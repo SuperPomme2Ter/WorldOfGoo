@@ -135,9 +135,33 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 251666404864242541, guid: 81c23f758ccdd1c4b8e9025c3169237a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 201.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 251666404864242541, guid: 81c23f758ccdd1c4b8e9025c3169237a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 182.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1015402392803943400, guid: 81c23f758ccdd1c4b8e9025c3169237a, type: 3}
+      propertyPath: springDamping
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1015402392803943400, guid: 81c23f758ccdd1c4b8e9025c3169237a, type: 3}
+      propertyPath: springFrequency
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 1552578465806663341, guid: 81c23f758ccdd1c4b8e9025c3169237a, type: 3}
       propertyPath: m_Name
       value: SceneBase
+      objectReference: {fileID: 0}
+    - target: {fileID: 1653441620409257681, guid: 81c23f758ccdd1c4b8e9025c3169237a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 75
+      objectReference: {fileID: 0}
+    - target: {fileID: 1653441620409257681, guid: 81c23f758ccdd1c4b8e9025c3169237a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 56.6
       objectReference: {fileID: 0}
     - target: {fileID: 3103669155702566933, guid: 81c23f758ccdd1c4b8e9025c3169237a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -181,11 +205,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7034972094301677093, guid: 81c23f758ccdd1c4b8e9025c3169237a, type: 3}
       propertyPath: weight
-      value: 6
+      value: 24
+      objectReference: {fileID: 0}
+    - target: {fileID: 7100678856632582180, guid: 81c23f758ccdd1c4b8e9025c3169237a, type: 3}
+      propertyPath: m_NormalizedViewPortRect.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7100678856632582180, guid: 81c23f758ccdd1c4b8e9025c3169237a, type: 3}
+      propertyPath: m_NormalizedViewPortRect.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7100678856632582180, guid: 81c23f758ccdd1c4b8e9025c3169237a, type: 3}
+      propertyPath: m_NormalizedViewPortRect.width
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7100678856632582180, guid: 81c23f758ccdd1c4b8e9025c3169237a, type: 3}
+      propertyPath: m_NormalizedViewPortRect.height
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8371365971685874585, guid: 81c23f758ccdd1c4b8e9025c3169237a, type: 3}
       propertyPath: weight
-      value: 7
+      value: 19
+      objectReference: {fileID: 0}
+    - target: {fileID: 8959994638673104041, guid: 81c23f758ccdd1c4b8e9025c3169237a, type: 3}
+      propertyPath: m_Colors.m_HighlightedColor.a
+      value: 0.27450982
       objectReference: {fileID: 0}
     - target: {fileID: 9087552499233774398, guid: 81c23f758ccdd1c4b8e9025c3169237a, type: 3}
       propertyPath: createPixels
@@ -226,11 +270,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 13936410971104154, guid: 472d8dfe0ee64fe45a25bef5127c83aa, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 185.3
+      value: 226.9
       objectReference: {fileID: 0}
     - target: {fileID: 13936410971104154, guid: 472d8dfe0ee64fe45a25bef5127c83aa, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 103.2
+      value: 126.8
       objectReference: {fileID: 0}
     - target: {fileID: 13936410971104154, guid: 472d8dfe0ee64fe45a25bef5127c83aa, type: 3}
       propertyPath: m_LocalPosition.z
@@ -282,7 +326,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8602590709529463662, guid: 472d8dfe0ee64fe45a25bef5127c83aa, type: 3}
       propertyPath: weight
-      value: 5
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 8602590709529463662, guid: 472d8dfe0ee64fe45a25bef5127c83aa, type: 3}
       propertyPath: gravity.y

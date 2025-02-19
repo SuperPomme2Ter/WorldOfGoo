@@ -31,7 +31,7 @@ public class Transporters : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
         foreach (Collider2D col in collider.Where(x=> x.TryGetComponent<Cell>(out Cell trash)))
         {
             
-            if (col is CircleCollider2D && Vector2.Distance(col.gameObject.transform.position,transform.position)<distMax)
+            if (col is BoxCollider2D && Vector2.Distance(col.gameObject.transform.position,transform.position)<distMax)
             {
                 Debug.Log(col.gameObject.name);
                 if (nearbyStations.Count >= pivots.Count)
@@ -78,7 +78,7 @@ public class Transporters : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
         foreach (Collider2D col in collider.Where(x => x.TryGetComponent<Cell>(out Cell trash)))
         {
 
-            if (col is CircleCollider2D && Vector2.Distance(col.gameObject.transform.position, transform.position) < distMax)
+            if (col is BoxCollider2D && Vector2.Distance(col.gameObject.transform.position, transform.position) < distMax)
             {
                 GameObject cell = Instantiate(Cell.stationPrefab, transform.position, Quaternion.identity);
                 BeginningCell.instance.nbTransporters -= 1;
