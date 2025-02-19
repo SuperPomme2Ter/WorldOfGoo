@@ -22,6 +22,7 @@ public class LinkUpdater : MonoBehaviour
 
         
         link.positionCount = nbPos.Count;
+        link.SetPositions(new Vector3[]{Vector3.zero});
         link.SetPositions(nbPos.ToArray());
         //link.material.mainTextureScale = new Vector2(spriteCount * BeginningCell.instance.spriteScale, 1);
         //if (link.material != null)

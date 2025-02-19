@@ -75,7 +75,7 @@ public class S_GravityMap : MonoBehaviour
                     if (createPixels)
                     {
                         pixels[i][j].GetComponent<S_PixelInfo>().force=pixelsForce[i][j];
-                        float rslt = ((pixelsForce[i][j].magnitude)/(100*stationMass));
+                        float rslt = ((pixelsForce[i][j].magnitude)/(130*stationMass));
                         pixelsColorValue[i][j] += rslt;
                     }
 

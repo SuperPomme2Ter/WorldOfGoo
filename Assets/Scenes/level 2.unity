@@ -204,6 +204,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SceneBase
       objectReference: {fileID: 0}
+    - target: {fileID: 2481451888464908786, guid: 81c23f758ccdd1c4b8e9025c3169237a, type: 3}
+      propertyPath: maxDistance
+      value: 40
+      objectReference: {fileID: 0}
     - target: {fileID: 3103669155702566933, guid: 81c23f758ccdd1c4b8e9025c3169237a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -246,27 +250,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6469149355666816559, guid: 81c23f758ccdd1c4b8e9025c3169237a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -7.6
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6469149355666816559, guid: 81c23f758ccdd1c4b8e9025c3169237a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 88.5
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 7795299330014808594, guid: 81c23f758ccdd1c4b8e9025c3169237a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 130.3
+      value: 144
       objectReference: {fileID: 0}
     - target: {fileID: 7795299330014808594, guid: 81c23f758ccdd1c4b8e9025c3169237a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 22.3
+      value: 22
       objectReference: {fileID: 0}
     - target: {fileID: 7842709747530703229, guid: 81c23f758ccdd1c4b8e9025c3169237a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 93.3
+      value: 108
       objectReference: {fileID: 0}
     - target: {fileID: 7842709747530703229, guid: 81c23f758ccdd1c4b8e9025c3169237a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 22.5
+      value: 22
       objectReference: {fileID: 0}
     - target: {fileID: 8959994638673104041, guid: 81c23f758ccdd1c4b8e9025c3169237a, type: 3}
       propertyPath: m_Colors.m_HighlightedColor.a
@@ -569,7 +573,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9173608197119741888, guid: a5d06a40766d7b3449277da2f73df929, type: 3}
       propertyPath: weight
-      value: 10
+      value: 120
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

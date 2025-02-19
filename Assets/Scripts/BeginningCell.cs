@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class BeginningCell : Cell
@@ -28,6 +29,18 @@ public class BeginningCell : Cell
         for (int i = 0; i < nbTransporters; i++) 
         {
             Instantiate(transportersPrefab,transform.position,Quaternion.identity);
+        }
+        foreach (GameObject Station in allStations.Where(x=>Vector2.Distance(x.transform.position,transform.position)<maxDistance)) 
+        {
+            if (connections.Count >= 3)
+            {
+                break;
+            }
+            Cell cell=Station.GetComponent<Cell>();
+            if(Station!=gameObject)
+            {
+                LinkToAnotherCell(cell.GetComponent<Cell>());
+            }
         }
         
     }
