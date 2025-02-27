@@ -25,7 +25,7 @@ public class CellAttraction : MonoBehaviour
         
     }
 
-    Vector3 planetGravity;
+    //Vector3 planetGravity;
 
     private void FixedUpdate()
     {
@@ -81,4 +81,6 @@ public class CellAttraction : MonoBehaviour
         return S_GravityMap.pixelsForce[(int)transform.position.x][(int)transform.position.y];
 
     }
+    
+    
 }

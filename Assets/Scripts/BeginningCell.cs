@@ -8,6 +8,7 @@ public class BeginningCell : Cell
     [SerializeField] public int nbTransporters;
     [SerializeField] private GameObject transportersPrefab;
     public GameObject stationPrefab;
+    public GameObject stationParent;
     public GameObject linkPrefab;    
     public List<GameObject> allStations = new();
 

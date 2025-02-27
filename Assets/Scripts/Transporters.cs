@@ -8,7 +8,11 @@ public class Transporters : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     BeginningCell Cell;
     float distMax;
     List<GameObject> nearbyStations=new List<GameObject>();
-    List<GameObject> pivots=new List<GameObject>();
+    [SerializeField] List<GameObject> pivots=new List<GameObject>();
+    [SerializeField] GameObject highlightSelection;
+    [SerializeField] SpriteRenderer mainSprite;
+    [SerializeField] SpriteRenderer highlightSprite;
+    
     CircleCollider2D detectionRange;
     Vector3 originalPosition;
     TransporterPathfinding pathfinding;
@@ -18,9 +22,6 @@ public class Transporters : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
         pathfinding=GetComponent<TransporterPathfinding>();
         Cell=BeginningCell.instance;
         distMax=Cell.maxDistance;
-        pivots.Add(transform.GetChild(0).gameObject);
-        pivots.Add(transform.GetChild(1).gameObject);
-        
     }
     
     public void OnDrag(PointerEventData eventData)
@@ -64,6 +65,9 @@ public class Transporters : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     {
         originalPosition=transform.position;
         pathfinding.enabled = false;
+        highlightSelection.SetActive(true);
+        mainSprite.sortingOrder += 5;
+        highlightSprite.sortingOrder += 5;
     }
 
     public void OnPointerUp(PointerEventData eventData)
@@ -73,6 +77,9 @@ public class Transporters : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
         {
             transform.position = originalPosition;
             pathfinding.enabled = true;
+            highlightSelection.SetActive(false);
+            mainSprite.sortingOrder -= 5;
+            highlightSprite.sortingOrder -= 5;
             return;
         }
         foreach (Collider2D col in collider.Where(x => x.TryGetComponent<Cell>(out Cell trash)))
@@ -80,7 +87,7 @@ public class Transporters : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
 
             if (col is BoxCollider2D && Vector2.Distance(col.gameObject.transform.position, transform.position) < distMax)
             {
-                GameObject cell = Instantiate(Cell.stationPrefab, transform.position, Quaternion.identity);
+                GameObject cell = Instantiate(Cell.stationPrefab, transform.position, Quaternion.identity,BeginningCell.instance.stationParent.transform);
                 BeginningCell.instance.nbTransporters -= 1;
                 Destroy(gameObject);
                 return;
@@ -89,5 +96,8 @@ public class Transporters : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
         }
         transform.position = originalPosition;
         pathfinding.enabled = true;
+        highlightSelection.SetActive(false);
+        mainSprite.sortingOrder -= 5;
+        highlightSprite.sortingOrder -= 5;
     }
 }
