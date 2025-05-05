@@ -5,6 +5,7 @@ using UnityEngine;
 public class S_PixelInfo : MonoBehaviour
 {
     public Vector2 force;
+    public float colorValue;
     public int indexX;
     public int indexY;
     void Start()

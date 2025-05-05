@@ -12,7 +12,6 @@ public class End : MonoBehaviour
 
     GameObject refreshButton;
     Transform buttonPos;
-    BeginningCell cell;
 
     public void NextLevel()
     {
@@ -22,7 +21,6 @@ public class End : MonoBehaviour
     }
     private void Start()
     {
-        cell=BeginningCell.instance;
         objectiveText.GetComponent<TextMeshProUGUI>().text = $"Transporters necessary to win : {nbOfTransportersForVictory}";
         refreshButton=endText.transform.parent.GetChild(2).gameObject;
         buttonPos=endText.transform.GetChild(0).GetChild(0);
@@ -39,15 +37,15 @@ public class End : MonoBehaviour
             if (collision is BoxCollider2D)
             {
                 endText.SetActive(true);
-                if (cell.nbTransporters < nbOfTransportersForVictory)
+                if (transform.parent.GetChild(1).childCount < nbOfTransportersForVictory)
                 {
-                    endText.GetComponent<TextMeshProUGUI>().text = $"{cell.nbTransporters} transporters left, {nbOfTransportersForVictory} were necessary to win. Try again.";
+                    endText.GetComponent<TextMeshProUGUI>().text = $"{transform.parent.GetChild(1).childCount} transporters left, {nbOfTransportersForVictory} were necessary to win. Try again.";
                     buttonPos.gameObject.SetActive(false);
                     refreshButton.transform.position = buttonPos.position;
                 }
                 else
                 {
-                    endText.GetComponent<TextMeshProUGUI>().text = $"{cell.nbTransporters} transporters left. That's enough material for the next colony. Good Job.";
+                    endText.GetComponent<TextMeshProUGUI>().text = $"{transform.parent.GetChild(1).childCount} transporters left. That's enough material for the next colony. Good Job.";
 
                 }
                 Time.timeScale = 0;

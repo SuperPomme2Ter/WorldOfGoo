@@ -8,7 +8,6 @@ public class StationCell : Cell
     {
         BeginningCell beginning=BeginningCell.instance;
         beginning.allStations.Add(this.gameObject);
-        maxDistance=beginning.maxDistance;
         spriteScale=beginning.spriteScale;
         linkMaterial = beginning.linkMaterial;
         foreach (GameObject Station in BeginningCell.instance.allStations.Where(x=>Vector2.Distance(x.transform.position,transform.position)<BeginningCell.instance.maxDistance)) 
