@@ -127,14 +127,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   connections: []
+  minDistance: 5
   maxDistance: 50
   spriteScale: 0.5
   linkMaterial: {fileID: 2100000, guid: 19979837cc36ec54b83d4ab8605ef50e, type: 2}
+  springFrequency: 1.5
+  springDamping: 1
   nbTransporters: 10
   transportersPrefab: {fileID: 1317719167985554108, guid: 4aaef5a04dbd9214a9e60a5b7edf580b, type: 3}
   stationPrefab: {fileID: 5825468945835687528, guid: 3dc20a31ecf645c4280ca1fa68371bf7, type: 3}
   linkPrefab: {fileID: 7139484951329490397, guid: 9d27a39fd7495a64d82ec8c6d78eaf50, type: 3}
   allStations: []
+  stationsChecked: []
 --- !u!61 &2615856988627883482
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Xml.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -9,12 +10,14 @@ public class Cell : MonoBehaviour
 {
     public List<GameObject> connections = new();
     public Dictionary<SpringJoint2D, GameObject> springAndRenderer= new Dictionary<SpringJoint2D, GameObject>();
+    public float minDistance;
     public float maxDistance;
     public float spriteScale;
     public Material linkMaterial;
     [SerializeField] private float springFrequency=1.5f;
     [Range(0,1)]
     [SerializeField] private float springDamping=1;
+    
 
     public void LinkToAnotherCell(Cell anotherCell)
     {
@@ -45,13 +48,15 @@ public class Cell : MonoBehaviour
             Debug.LogError(name + "'s Line Renderer has no material!");
         newConnection.connectedBody = anotherCell.GetComponent<Rigidbody2D>();
         newConnection.dampingRatio = springDamping;
-        newConnection.distance = maxDistance;
+        newConnection.autoConfigureDistance = false;
+        newConnection.distance=Mathf.Clamp(Vector2.Distance(anotherCell.transform.position, transform.position),minDistance,maxDistance);
         newConnection.frequency = springFrequency;
         anotherCell.connections.Add(gameObject);
         connections.Add(anotherCell.gameObject);
         LinkUpdater updater = linkGameobject.AddComponent<LinkUpdater>();
         updater.station1 = gameObject;
         updater.station2 = anotherCell.gameObject;
+        
 
     }
     private void Update()

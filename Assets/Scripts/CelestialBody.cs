@@ -8,6 +8,7 @@ using UnityEngine.Rendering.Universal;
 public class CelestialBody : MonoBehaviour
 {
     public float weight;
+    public float preciseWeight;
     [SerializeField] float intensityOffset=1;
 
     private void Start()
@@ -35,13 +36,13 @@ public class CelestialBody : MonoBehaviour
                             cellConnection.springAndRenderer.Remove(spring);
                             Destroy(spring);
                             Destroy(childToDestroy);
-
                         }
                     }
                 }
+                
                 cellConnection.connections.Remove(cell.gameObject);
             }
-
+            BeginningCell.instance.stationsChecked.Remove(cell.GetComponent<CellAttraction>());
             BeginningCell.instance.allStations.Remove(cell.gameObject);
             Destroy(cell.gameObject);
         }

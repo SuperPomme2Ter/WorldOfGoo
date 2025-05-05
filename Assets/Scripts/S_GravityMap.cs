@@ -9,8 +9,9 @@ public class S_GravityMap : MonoBehaviour
     [SerializeField] GameObject pixelPrefab;
     [SerializeField] GameObject pixelPointParent;
     [SerializeField] Gradient forceGradient;
+    [SerializeField] Gradient forceGradient2;
     [SerializeField] private bool createPixels;
-    private float stationMass = 1f;
+    [SerializeField] private GameObject stationPrefab;
     int width = 256;
     int height = 240;
     public static List<List<GameObject>> pixels = new ();
@@ -21,13 +22,15 @@ public class S_GravityMap : MonoBehaviour
 
     void Start()
     {
-        stationMass=BeginningCell.instance.stationPrefab.GetComponent<Rigidbody2D>().mass;
-        PixelsCalculation();
+        //stationMass=BeginningCell.instance.stationPrefab.GetComponent<Rigidbody2D>().mass;
+        StartCoroutine(PixelsCalculation());
     }
 
-    private void PixelsCalculation()
+    private IEnumerator PixelsCalculation()
     {
+        float aaa = 0;
         Debug.Log("Beginning");
+        yield return new WaitForEndOfFrame();
         List<GameObject> planets = new List<GameObject>();
         foreach (Transform child in transform)
         {
@@ -60,6 +63,7 @@ public class S_GravityMap : MonoBehaviour
         }
         Debug.Log("pixels instantiated");
         Debug.Log("calculating pixels value");
+        yield return new WaitForEndOfFrame();
         foreach (GameObject planet in planets)
         {
             for (int i = 0; i < width; i++)
@@ -68,14 +72,16 @@ public class S_GravityMap : MonoBehaviour
                 {
                     Vector2 pixelPosition= new Vector2(i,j);
                     float dist = Vector2.Distance(pixelPosition, planet.transform.position);
+                    //dist *= 1000;
                     Vector2 direction =  (Vector2)planet.transform.position-pixelPosition;
                     direction.Normalize();
-                    pixelsForce[i][j] += direction * ((Mathf.Pow(10,-11)*6.67430f)*((((planet.GetComponent<CelestialBody>().weight*Mathf.Pow(10,14))*stationMass)/(Mathf.Pow(dist,2)))));
+                    pixelsForce[i][j] += direction * (Mathf.Pow(10,-11)*6.67430f*(planet.GetComponent<CelestialBody>().preciseWeight*Mathf.Pow(10,planet.GetComponent<CelestialBody>().weight)*(stationPrefab.GetComponent<CellAttraction>().preciseWeight*Mathf.Pow(10,stationPrefab.GetComponent<Rigidbody2D>().mass)))/Mathf.Pow(dist,2));
                     
                     if (createPixels)
                     {
+                        
                         pixels[i][j].GetComponent<S_PixelInfo>().force=pixelsForce[i][j];
-                        float rslt = ((pixelsForce[i][j].magnitude)/(130*stationMass));
+                        float rslt = (pixelsForce[i][j].magnitude/(planet.GetComponent<CelestialBody>().preciseWeight*Mathf.Pow(10,4)));
                         pixelsColorValue[i][j] += rslt;
                     }
 
@@ -86,17 +92,30 @@ public class S_GravityMap : MonoBehaviour
         
         Debug.Log("done");
         Debug.Log("apply value to pixels");
+        yield return new WaitForEndOfFrame();
         if (createPixels)
         {
             for (int i = 0; i < pixels.Count; i++)
             {
                 for (int j = 0; j < pixels[i].Count; j++)
                 {
+                    // if (pixelsColorValue[i][j] > 50)
+                    // {
+                    //     pixels[i][j].GetComponent<SpriteRenderer>().color =
+                    //         forceGradient2.Evaluate(pixelsColorValue[i][j]);
+                    //     continue;
+                    // }
+                    if ((pixelsColorValue[i][j]) > aaa)
+                    {
+                        aaa=pixelsColorValue[i][j];
+                    }
                     pixels[i][j].GetComponent<SpriteRenderer>().color =
                         forceGradient.Evaluate(pixelsColorValue[i][j]);
+                    pixels[i][j].GetComponent<S_PixelInfo>().colorValue = pixelsColorValue[i][j];
                 }
             }
         }
+        Debug.Log(aaa);
         Debug.Log("done");
     }
 }
