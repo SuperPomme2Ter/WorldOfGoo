@@ -99,12 +99,12 @@ public class S_GravityMap : MonoBehaviour
             {
                 for (int j = 0; j < pixels[i].Count; j++)
                 {
-                    // if (pixelsColorValue[i][j] > 50)
-                    // {
-                    //     pixels[i][j].GetComponent<SpriteRenderer>().color =
-                    //         forceGradient2.Evaluate(pixelsColorValue[i][j]);
-                    //     continue;
-                    // }
+                    if (pixelsColorValue[i][j] > 50)
+                    {
+                        pixels[i][j].GetComponent<SpriteRenderer>().color =
+                            forceGradient2.Evaluate(pixelsColorValue[i][j]);
+                        continue;
+                    }
                     if ((pixelsColorValue[i][j]) > aaa)
                     {
                         aaa=pixelsColorValue[i][j];

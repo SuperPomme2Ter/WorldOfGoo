@@ -198,6 +198,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4525117550160938343, guid: 81c23f758ccdd1c4b8e9025c3169237a, type: 3}
+      propertyPath: preciseWeight
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7034972094301677093, guid: 81c23f758ccdd1c4b8e9025c3169237a, type: 3}
       propertyPath: weight
       value: 24
@@ -229,6 +233,70 @@ PrefabInstance:
     - target: {fileID: 9087552499233774398, guid: 81c23f758ccdd1c4b8e9025c3169237a, type: 3}
       propertyPath: createPixels
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9087552499233774398, guid: 81c23f758ccdd1c4b8e9025c3169237a, type: 3}
+      propertyPath: stationPrefab
+      value: 
+      objectReference: {fileID: 5825468945835687528, guid: 3dc20a31ecf645c4280ca1fa68371bf7, type: 3}
+    - target: {fileID: 9087552499233774398, guid: 81c23f758ccdd1c4b8e9025c3169237a, type: 3}
+      propertyPath: forceGradient2.ctime1
+      value: 16384
+      objectReference: {fileID: 0}
+    - target: {fileID: 9087552499233774398, guid: 81c23f758ccdd1c4b8e9025c3169237a, type: 3}
+      propertyPath: forceGradient2.ctime2
+      value: 49344
+      objectReference: {fileID: 0}
+    - target: {fileID: 9087552499233774398, guid: 81c23f758ccdd1c4b8e9025c3169237a, type: 3}
+      propertyPath: forceGradient2.ctime3
+      value: 65535
+      objectReference: {fileID: 0}
+    - target: {fileID: 9087552499233774398, guid: 81c23f758ccdd1c4b8e9025c3169237a, type: 3}
+      propertyPath: forceGradient2.key0.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9087552499233774398, guid: 81c23f758ccdd1c4b8e9025c3169237a, type: 3}
+      propertyPath: forceGradient2.key0.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9087552499233774398, guid: 81c23f758ccdd1c4b8e9025c3169237a, type: 3}
+      propertyPath: forceGradient2.key0.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9087552499233774398, guid: 81c23f758ccdd1c4b8e9025c3169237a, type: 3}
+      propertyPath: forceGradient2.key1.b
+      value: 0.39215687
+      objectReference: {fileID: 0}
+    - target: {fileID: 9087552499233774398, guid: 81c23f758ccdd1c4b8e9025c3169237a, type: 3}
+      propertyPath: forceGradient2.key1.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9087552499233774398, guid: 81c23f758ccdd1c4b8e9025c3169237a, type: 3}
+      propertyPath: forceGradient2.key1.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9087552499233774398, guid: 81c23f758ccdd1c4b8e9025c3169237a, type: 3}
+      propertyPath: forceGradient2.key2.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9087552499233774398, guid: 81c23f758ccdd1c4b8e9025c3169237a, type: 3}
+      propertyPath: forceGradient2.key2.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9087552499233774398, guid: 81c23f758ccdd1c4b8e9025c3169237a, type: 3}
+      propertyPath: forceGradient2.key3.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9087552499233774398, guid: 81c23f758ccdd1c4b8e9025c3169237a, type: 3}
+      propertyPath: forceGradient2.key3.g
+      value: 0.78431374
+      objectReference: {fileID: 0}
+    - target: {fileID: 9087552499233774398, guid: 81c23f758ccdd1c4b8e9025c3169237a, type: 3}
+      propertyPath: forceGradient2.key3.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9087552499233774398, guid: 81c23f758ccdd1c4b8e9025c3169237a, type: 3}
+      propertyPath: forceGradient2.m_NumColorKeys
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
