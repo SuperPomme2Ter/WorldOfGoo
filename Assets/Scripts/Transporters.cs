@@ -9,18 +9,13 @@ public class Transporters : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     float distMax;
     List<GameObject> nearbyStations=new List<GameObject>();
     [SerializeField] List<GameObject> pivots=new List<GameObject>();
-<<<<<<< Updated upstream
     [SerializeField] GameObject highlightSelection;
     [SerializeField] SpriteRenderer mainSprite;
     [SerializeField] SpriteRenderer highlightSprite;
     
-=======
->>>>>>> Stashed changes
     CircleCollider2D detectionRange;
     Vector3 originalPosition;
     TransporterPathfinding pathfinding;
-    [SerializeField] SpriteRenderer selectionSprite;
-    [SerializeField] SpriteRenderer mainSprite;
 
     void Start()
     {
@@ -68,15 +63,9 @@ public class Transporters : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     {
         originalPosition=transform.position;
         pathfinding.enabled = false;
-<<<<<<< Updated upstream
         highlightSelection.SetActive(true);
         mainSprite.sortingOrder += 5;
         highlightSprite.sortingOrder += 5;
-=======
-        selectionSprite.gameObject.SetActive(true);
-        mainSprite.sortingOrder = 6;
-        selectionSprite.sortingOrder = 5;
->>>>>>> Stashed changes
     }
 
     public void OnPointerUp(PointerEventData eventData)
@@ -86,15 +75,9 @@ public class Transporters : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
         {
             transform.position = originalPosition;
             pathfinding.enabled = true;
-<<<<<<< Updated upstream
             highlightSelection.SetActive(false);
             mainSprite.sortingOrder -= 5;
             highlightSprite.sortingOrder -= 5;
-=======
-            selectionSprite.gameObject.SetActive(false);
-            mainSprite.sortingOrder = 1;
-            selectionSprite.sortingOrder = 0;
->>>>>>> Stashed changes
             return;
         }
         foreach (Collider2D col in collider.Where(x => x.TryGetComponent<Cell>(out Cell trash)))
@@ -102,12 +85,7 @@ public class Transporters : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
 
             if (col is BoxCollider2D && Vector2.Distance(col.gameObject.transform.position, transform.position) < distMax)
             {
-<<<<<<< Updated upstream
                 GameObject cell = Instantiate(Cell.stationPrefab, transform.position, Quaternion.identity,BeginningCell.instance.stationParent.transform);
-=======
-                GameObject cell = Instantiate(Cell.stationPrefab, transform.position, Quaternion.identity,BeginningCell.instance.transform.parent);
-                cell.name = Cell.stationPrefab.name+BeginningCell.instance.allStations.Count.ToString();
->>>>>>> Stashed changes
                 BeginningCell.instance.nbTransporters -= 1;
                 Destroy(gameObject);
                 return;
@@ -116,14 +94,8 @@ public class Transporters : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
         }
         transform.position = originalPosition;
         pathfinding.enabled = true;
-<<<<<<< Updated upstream
         highlightSelection.SetActive(false);
         mainSprite.sortingOrder -= 5;
         highlightSprite.sortingOrder -= 5;
-=======
-        selectionSprite.gameObject.SetActive(false);
-        mainSprite.sortingOrder = 1;
-        selectionSprite.sortingOrder = 0;
->>>>>>> Stashed changes
     }
 }

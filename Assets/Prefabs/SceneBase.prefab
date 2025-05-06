@@ -204,11 +204,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-<<<<<<< Updated upstream
   - {fileID: 5305095034999057811}
-=======
-  - {fileID: 212694608375341151}
->>>>>>> Stashed changes
   m_Father: {fileID: 6905119035545732762}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &9087552499233774398
@@ -6662,7 +6658,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7004982313923879946, guid: 3d92e2431d855d5489df53e63d3ba5d1, type: 3}
   m_PrefabInstance: {fileID: 999892276951647607}
   m_PrefabAsset: {fileID: 0}
-<<<<<<< Updated upstream
 --- !u!1001 &5309454532180102665
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6729,8 +6724,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 13936410971104154, guid: 472d8dfe0ee64fe45a25bef5127c83aa, type: 3}
   m_PrefabInstance: {fileID: 5309454532180102665}
   m_PrefabAsset: {fileID: 0}
-=======
->>>>>>> Stashed changes
 --- !u!1001 &5752728551539548102
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6896,15 +6889,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8411359964922935554, guid: 3dc20a31ecf645c4280ca1fa68371bf7, type: 3}
       propertyPath: springFrequency
-<<<<<<< Updated upstream
       value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 8842597364749404447, guid: 3dc20a31ecf645c4280ca1fa68371bf7, type: 3}
       propertyPath: m_Enabled
       value: 0
-=======
-      value: 0.1
->>>>>>> Stashed changes
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

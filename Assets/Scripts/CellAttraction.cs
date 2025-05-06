@@ -45,11 +45,7 @@ public class CellAttraction : MonoBehaviour
         
     }
 
-<<<<<<< Updated upstream
     //Vector3 planetGravity;
-=======
-   // Vector3 planetGravity;
->>>>>>> Stashed changes
 
     private void FixedUpdate()
     {
@@ -118,10 +114,6 @@ public class CellAttraction : MonoBehaviour
         return S_GravityMap.pixelsForce[(int)transform.position.x][(int)transform.position.y];
 
     }
-<<<<<<< Updated upstream
-    
-    
-=======
 
     public void HelpSignal(Vector2 excessDirection)
     {
@@ -154,5 +146,4 @@ public class CellAttraction : MonoBehaviour
         }
         neightbourCells.Clear();
     }
->>>>>>> Stashed changes
 }

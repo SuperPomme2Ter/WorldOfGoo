@@ -108,14 +108,9 @@ MonoBehaviour:
   - {fileID: 6648397915146539323}
   - {fileID: 7214913279278340459}
   - {fileID: 1196462719101181384}
-<<<<<<< Updated upstream
   highlightSelection: {fileID: 8731208712405620655}
   mainSprite: {fileID: 4912907041937709479}
   highlightSprite: {fileID: 2144728884488925558}
-=======
-  selectionSprite: {fileID: 224779498039196854}
-  mainSprite: {fileID: 4912907041937709479}
->>>>>>> Stashed changes
 --- !u!61 &-1011765456442857743
 BoxCollider2D:
   m_ObjectHideFlags: 0

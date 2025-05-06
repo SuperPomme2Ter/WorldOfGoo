@@ -212,18 +212,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed7ef69021d7d6147a5c216ffe0fdadf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-<<<<<<< Updated upstream
   maxThrust: 15
-=======
-  appliedGravity: {x: 0, y: 0}
-  aaaaa: 0
-  preciseWeight: 1
-  thrustCoeff: 1.5
-  excessAttraction: {x: 0, y: 0}
-  supportThrust: {x: 0, y: 0}
-  stationCell: {fileID: 8411359964922935554}
-  helpDirectionAngleMax: 20
->>>>>>> Stashed changes
 --- !u!114 &8411359964922935554
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -241,11 +230,6 @@ MonoBehaviour:
   maxDistance: 40
   spriteScale: 1
   linkMaterial: {fileID: 0}
-<<<<<<< Updated upstream
-=======
-  springFrequency: 0.8
-  springDamping: 0.4
->>>>>>> Stashed changes
 --- !u!61 &-8646426662553568373
 BoxCollider2D:
   m_ObjectHideFlags: 0
