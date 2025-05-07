@@ -75,7 +75,7 @@ public class S_GravityMap : MonoBehaviour
                     //dist *= 1000;
                     Vector2 direction =  (Vector2)planet.transform.position-pixelPosition;
                     direction.Normalize();
-                    pixelsForce[i][j] += direction * (Mathf.Pow(10,-11)*6.67430f*(planet.GetComponent<CelestialBody>().preciseWeight*Mathf.Pow(10,planet.GetComponent<CelestialBody>().weight)*(stationPrefab.GetComponent<CellAttraction>().preciseWeight*Mathf.Pow(10,stationPrefab.GetComponent<Rigidbody2D>().mass)))/Mathf.Pow(dist,2));
+                    pixelsForce[i][j] += direction * (Mathf.Pow(10,-11)*6.67430f*(planet.GetComponentInChildren<CelestialBody>().preciseWeight*Mathf.Pow(10,planet.GetComponentInChildren<CelestialBody>().weight)*(stationPrefab.GetComponent<CellAttraction>().preciseWeight*Mathf.Pow(10,stationPrefab.GetComponent<Rigidbody2D>().mass)))/Mathf.Pow(dist,2));
                     
                     if (createPixels)
                     {
