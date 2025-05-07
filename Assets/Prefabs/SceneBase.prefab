@@ -251,7 +251,38 @@ MonoBehaviour:
     m_ColorSpace: -1
     m_NumColorKeys: 4
     m_NumAlphaKeys: 2
-  createPixels: 0
+  forceGradient2:
+    serializedVersion: 2
+    key0: {r: 1, g: 0, b: 0, a: 1}
+    key1: {r: 1, g: 0.2509804, b: 0.2509804, a: 1}
+    key2: {r: 1, g: 0.5019608, b: 0.5019608, a: 0}
+    key3: {r: 1, g: 1, b: 1, a: 0}
+    key4: {r: 0, g: 0, b: 0, a: 0}
+    key5: {r: 0, g: 0, b: 0, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 0
+    ctime1: 16384
+    ctime2: 49151
+    ctime3: 65535
+    ctime4: 0
+    ctime5: 0
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_ColorSpace: -1
+    m_NumColorKeys: 4
+    m_NumAlphaKeys: 2
+  createPixels: 1
+  stationPrefab: {fileID: 5825468945835687528, guid: 3dc20a31ecf645c4280ca1fa68371bf7, type: 3}
 --- !u!1 &1446116271574663631
 GameObject:
   m_ObjectHideFlags: 0
@@ -6520,9 +6551,17 @@ PrefabInstance:
       value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 3427160022984971397, guid: 3d92e2431d855d5489df53e63d3ba5d1, type: 3}
+      propertyPath: minDistance
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 3427160022984971397, guid: 3d92e2431d855d5489df53e63d3ba5d1, type: 3}
       propertyPath: spriteScale
       value: 0.8
       objectReference: {fileID: 0}
+    - target: {fileID: 3427160022984971397, guid: 3d92e2431d855d5489df53e63d3ba5d1, type: 3}
+      propertyPath: stationParent
+      value: 
+      objectReference: {fileID: 3857143701035215191}
     - target: {fileID: 3427160022984971397, guid: 3d92e2431d855d5489df53e63d3ba5d1, type: 3}
       propertyPath: nbTransporters
       value: 15
@@ -6531,6 +6570,10 @@ PrefabInstance:
       propertyPath: springFrequency
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 3427160022984971397, guid: 3d92e2431d855d5489df53e63d3ba5d1, type: 3}
+      propertyPath: transportersPrefab
+      value: 
+      objectReference: {fileID: 1317719167985554108, guid: e92a579051e34ef43af0547e30d62152, type: 3}
     - target: {fileID: 7004982313923879946, guid: 3d92e2431d855d5489df53e63d3ba5d1, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.59999996
@@ -6603,7 +6646,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 13936410971104154, guid: 472d8dfe0ee64fe45a25bef5127c83aa, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 120
+      value: 119.5
       objectReference: {fileID: 0}
     - target: {fileID: 13936410971104154, guid: 472d8dfe0ee64fe45a25bef5127c83aa, type: 3}
       propertyPath: m_LocalPosition.z
@@ -6643,7 +6686,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8602590709529463662, guid: 472d8dfe0ee64fe45a25bef5127c83aa, type: 3}
       propertyPath: weight
-      value: 6.5
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6820,7 +6863,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8411359964922935554, guid: 3dc20a31ecf645c4280ca1fa68371bf7, type: 3}
       propertyPath: springFrequency
-      value: 0.3
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 8842597364749404447, guid: 3dc20a31ecf645c4280ca1fa68371bf7, type: 3}
       propertyPath: m_Enabled

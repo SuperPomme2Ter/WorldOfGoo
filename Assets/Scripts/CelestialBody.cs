@@ -10,16 +10,20 @@ public class CelestialBody : MonoBehaviour
     public float weight;
     public float preciseWeight;
     [SerializeField] float intensityOffset=1;
+    [SerializeField] private ColliderDetector planeteCollision;
+    
 
     private void Start()
     {
         TryGetComponent<Light2D>(out Light2D light);
         if(light != null) { light.pointLightOuterRadius = transform.localScale.x * intensityOffset; }
-        
+
+        planeteCollision.onTriggerEnterFunction = CrashStations;
+
     }
+    
 
-
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void CrashStations(Collider2D collision)
     {
         if(collision.gameObject.TryGetComponent<Cell>(out Cell cell))
         {

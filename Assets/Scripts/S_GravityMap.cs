@@ -81,7 +81,7 @@ public class S_GravityMap : MonoBehaviour
                     {
                         
                         pixels[i][j].GetComponent<S_PixelInfo>().force=pixelsForce[i][j];
-                        float rslt = (pixelsForce[i][j].magnitude/(planet.GetComponent<CelestialBody>().preciseWeight*Mathf.Pow(10,4)));
+                        float rslt = pixelsForce[i][j].magnitude/1000;
                         pixelsColorValue[i][j] += rslt;
                     }
 
@@ -99,15 +99,16 @@ public class S_GravityMap : MonoBehaviour
             {
                 for (int j = 0; j < pixels[i].Count; j++)
                 {
-                    if (pixelsColorValue[i][j] > 50)
-                    {
-                        pixels[i][j].GetComponent<SpriteRenderer>().color =
-                            forceGradient2.Evaluate(pixelsColorValue[i][j]);
-                        continue;
-                    }
                     if ((pixelsColorValue[i][j]) > aaa)
                     {
                         aaa=pixelsColorValue[i][j];
+                    }
+                    if (pixelsColorValue[i][j] > 50)
+                    {
+                        pixels[i][j].GetComponent<SpriteRenderer>().color =
+                            forceGradient2.Evaluate(pixelsColorValue[i][j]-50);
+                        pixels[i][j].GetComponent<S_PixelInfo>().colorValue = pixelsColorValue[i][j];
+                        continue;
                     }
                     pixels[i][j].GetComponent<SpriteRenderer>().color =
                         forceGradient.Evaluate(pixelsColorValue[i][j]);
