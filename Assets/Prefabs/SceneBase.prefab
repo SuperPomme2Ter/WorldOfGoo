@@ -281,8 +281,10 @@ MonoBehaviour:
     m_ColorSpace: -1
     m_NumColorKeys: 4
     m_NumAlphaKeys: 2
-  createPixels: 1
+  createPixels: 0
   stationPrefab: {fileID: 5825468945835687528, guid: 3dc20a31ecf645c4280ca1fa68371bf7, type: 3}
+  jsonSavePath: C:/Users/Durand/Desktop/Dev/Quetes/B2/Quete 1 World Of Goo/WorldOfGoo/WorldOfGoo/Assets/Saves/level
+    3 save.json
 --- !u!1 &1446116271574663631
 GameObject:
   m_ObjectHideFlags: 0

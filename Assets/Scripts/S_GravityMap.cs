@@ -1,8 +1,15 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Text;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json.Schema;
 using Unity.Mathematics;
 using UnityEngine;
-using UnityEngine.Serialization;
+using UnityEngine.SceneManagement;
 
 public class S_GravityMap : MonoBehaviour
 {
@@ -12,26 +19,137 @@ public class S_GravityMap : MonoBehaviour
     [SerializeField] Gradient forceGradient2;
     [SerializeField] private bool createPixels;
     [SerializeField] private GameObject stationPrefab;
+    [SerializeField] string jsonSavePath;
     int width = 256;
     int height = 240;
     public static List<List<GameObject>> pixels = new ();
     List<List<float>> pixelsColorValue= new ();
-    public static List< List<Vector2>> pixelsForce = new ();
-
-
-
-    void Start()
+    public static Vector2[] pixelsForce;
+    
+    
+    [ContextMenu("Generate Pixels")]
+    private void GeneratePixels()
     {
-        //stationMass=BeginningCell.instance.stationPrefab.GetComponent<Rigidbody2D>().mass;
-        StartCoroutine(PixelsCalculation());
+        if (File.Exists(jsonSavePath))
+        {
+            
+            string jsonFile = File.ReadAllText(jsonSavePath);
+            if (jsonFile != "")
+            {
+                File.WriteAllText(jsonSavePath, String.Empty);
+            }
+            createPixels = false;
+            PixelsCalculation();
+            float[][] pixelArray= new float[width*height][];
+            for (int i = 0; i < width; i++)
+            {
+                for (int j = 0; j < height; j++)
+                {
+                    pixelArray[i*height + j] = new float[2] { pixelsForce[i*height + j].x, pixelsForce[i*height + j].y };
+                }
+            }
+
+            string pixelDataJson = JsonConvert.SerializeObject(pixelArray);
+            
+            StringBuilder sb = new StringBuilder();
+            StringWriter sw = new StringWriter(sb);
+
+            using (JsonWriter writer = new JsonTextWriter(sw))
+            {
+                JsonSerializer serializer = new JsonSerializer();
+                
+                writer.Formatting = Formatting.None;
+                
+                serializer.Serialize(writer, pixelArray);
+            }
+            File.WriteAllText(jsonSavePath, sw.ToString());
+        }
+        else
+        {
+            Debug.Log("aezeqfrdzsq");
+        }
+        
+
     }
 
-    private IEnumerator PixelsCalculation()
+    private void ReadJsonPixels(Vector2[] pixelsList)
     {
-        float aaa = 0;
-        Debug.Log("Beginning");
-        yield return new WaitForEndOfFrame();
+        if (File.Exists(jsonSavePath))
+        {
+            
+            using (var stream = File.OpenRead(jsonSavePath))
+            using (var reader = new StreamReader(stream, Encoding.ASCII))
+            {
+                if (reader.Peek() <= -1)
+                {
+                    PixelsCalculation();
+                }
+                
+            }
+            float[][] pixelArray;
+            
+            pixelArray = JsonConvert.DeserializeObject<float[][]>(File.ReadAllText(jsonSavePath));
+            
+            
+            for (int i = 0; i < pixelArray.Length; i++)
+            {
+
+                    pixelsList[i].x = pixelArray[i][0];
+                    pixelsList[i].y = pixelArray[i][1];
+                
+            }
+
+        }
+    }
+    // private string GetPath(string filename)
+    //  {
+    //      return Application.dataPath + "/Saves/" + filename;
+    //      File.WriteAllText(jsonSavePath,pixelsForce.ToString());
+    //  }
+     
+
+     void Start()
+     {
+
+         // for (int i = 0; i < width; i++)
+         // {
+         //     for (int j = 0; j < height; j++)
+         //     {
+         //        Debug.Log(i*height + j);
+         //     }
+         // }
+        //
+        jsonSavePath=Application.dataPath + "/Saves/" + SceneManager.GetActiveScene().name+" save.json";
+        pixelsForce = new Vector2[width*height];
+        for (int i = 0; i < width; i++)
+        {
+            for (int j = 0; j < height; j++)
+            {
+                pixelsForce[i*height + j]=(new Vector2(0, 0));
+            }
+            
+        }
+        ReadJsonPixels(pixelsForce);
+        //PixelsCalculation();
+        //GeneratePixels();
+        Debug.Log(Time.realtimeSinceStartup);
+        // string aaa=ReadFile(jsonSavePath);
+        // if (aaa == "")
+        // {
+        //     Debug.Log("oscour");
+        // }
+        // else
+        // {
+        //     Debug.Log(aaa);
+        // }
+        //stationMass=BeginningCell.instance.stationPrefab.GetComponent<Rigidbody2D>().mass;
+        //StartCoroutine(PixelsCalculation()); 
+    }
+
+    private void PixelsCalculation()
+    {
         List<GameObject> planets = new List<GameObject>();
+        pixelsForce = new Vector2[width*height];
         foreach (Transform child in transform)
         {
             planets.Add(child.gameObject);
@@ -44,7 +162,6 @@ public class S_GravityMap : MonoBehaviour
                 pixels.Add(new List<GameObject>());
                 pixelsColorValue.Add(new List<float>());
             }
-            pixelsForce.Add(new List<Vector2>());
             
             for (int j = 0; j < height; j++)
             {
@@ -57,13 +174,10 @@ public class S_GravityMap : MonoBehaviour
                     pixels[i].Add(newPixel);
                     pixelsColorValue[i].Add(0);
                 }
-                pixelsForce[i].Add(Vector2.zero);
+                pixelsForce[i+j*width]=Vector2.zero;
 
             }
         }
-        Debug.Log("pixels instantiated");
-        Debug.Log("calculating pixels value");
-        yield return new WaitForEndOfFrame();
         foreach (GameObject planet in planets)
         {
             for (int i = 0; i < width; i++)
@@ -75,34 +189,26 @@ public class S_GravityMap : MonoBehaviour
                     //dist *= 1000;
                     Vector2 direction =  (Vector2)planet.transform.position-pixelPosition;
                     direction.Normalize();
-                    pixelsForce[i][j] += direction * (Mathf.Pow(10,-11)*6.67430f*(planet.GetComponentInChildren<CelestialBody>().preciseWeight*Mathf.Pow(10,planet.GetComponentInChildren<CelestialBody>().weight)*(stationPrefab.GetComponent<CellAttraction>().preciseWeight*Mathf.Pow(10,stationPrefab.GetComponent<Rigidbody2D>().mass)))/Mathf.Pow(dist,2));
+                    pixelsForce[i+j*width] += direction * (Mathf.Pow(10,-11)*6.67430f*(planet.GetComponentInChildren<CelestialBody>().preciseWeight*Mathf.Pow(10,planet.GetComponentInChildren<CelestialBody>().weight)*(stationPrefab.GetComponent<CellAttraction>().preciseWeight*Mathf.Pow(10,stationPrefab.GetComponent<Rigidbody2D>().mass)))/Mathf.Pow(dist,2));
                     
                     if (createPixels)
                     {
                         
-                        pixels[i][j].GetComponent<S_PixelInfo>().force=pixelsForce[i][j];
-                        float rslt = pixelsForce[i][j].magnitude/1000;
+                        pixels[i][j].GetComponent<S_PixelInfo>().force=pixelsForce[i+j*width];
+                        float rslt = pixelsForce[i+j*width].magnitude/1000;
                         pixelsColorValue[i][j] += rslt;
                     }
-
-
                 }
             }
+            Debug.Log("AAAAAA");
         }
         
-        Debug.Log("done");
-        Debug.Log("apply value to pixels");
-        yield return new WaitForEndOfFrame();
         if (createPixels)
         {
             for (int i = 0; i < pixels.Count; i++)
             {
                 for (int j = 0; j < pixels[i].Count; j++)
                 {
-                    if ((pixelsColorValue[i][j]) > aaa)
-                    {
-                        aaa=pixelsColorValue[i][j];
-                    }
                     if (pixelsColorValue[i][j] > 50)
                     {
                         pixels[i][j].GetComponent<SpriteRenderer>().color =
@@ -116,8 +222,7 @@ public class S_GravityMap : MonoBehaviour
                 }
             }
         }
-        Debug.Log(aaa);
-        Debug.Log("done");
+        
     }
 }
 //template<NoiseFunc N>
@@ -141,3 +246,95 @@ public class S_GravityMap : MonoBehaviour
 //saveImage(filename, imageBuffer, imageWidth, imageHeight);
 //delete[] imageBuffer; 
 //} 
+
+
+
+
+
+// using System;
+// using System.Collections.Generic;
+// using System.IO;
+// using System.Linq;
+// using UnityEngine;
+//
+// public class PromptReader : MonoBehaviour
+// {
+//     public static List<T> ReadListFromJSON<T>(string filename)
+//     {
+//         string content = ReadFile(GetPath(filename));
+//
+//         if (string.IsNullOrEmpty(content) || content == "{}")
+//         {
+//             Debug.Log("FILE IS NULL OR EMPTY");
+//             return new List<T>();
+//         }
+//
+//         Debug.Log(content);
+//         List<T> res = JsonHelper.FromJson<T>(content).ToList();
+//
+//         return res;
+//
+//     }
+//
+//     public static T ReadFromJSON<T>(string filename)
+//     {
+//         string content = ReadFile(GetPath(filename));
+//
+//         if (string.IsNullOrEmpty(content) || content == "{}")
+//         {
+//             return default(T);
+//         }
+//
+//         T res = JsonUtility.FromJson<T>(content);
+//
+//         return res;
+//
+//     }
+//
+//     private static string GetPath(string filename)
+//     {
+//         return Application.dataPath + "/Scripts/" + filename;
+//     }
+//     private static string ReadFile(string path)
+//     {
+//         if (File.Exists(path))
+//         {
+//             using (StreamReader reader = new StreamReader(path))
+//             {
+//                 string content = reader.ReadToEnd();
+//                 return content;
+//             }
+//         }
+//         return "";
+//     }
+//     public static class JsonHelper
+//     {
+//         public static T[] FromJson<T>(string json)
+//         {
+//             Wrapper<T> wrapper = new Wrapper<T>();
+//             wrapper = JsonUtility.FromJson<Wrapper<T>>(json);
+//             if (wrapper == null) Debug.Log("WRAPPER IS NULL");
+//             return wrapper.Items;
+//         }
+//
+//         public static string ToJson<T>(T[] array)
+//         {
+//             Wrapper<T> wrapper = new Wrapper<T>();
+//             wrapper.Items = array;
+//             return JsonUtility.ToJson(wrapper);
+//         }
+//
+//         public static string ToJson<T>(T[] array, bool prettyPrint)
+//         {
+//             Wrapper<T> wrapper = new Wrapper<T>();
+//             wrapper.Items = array;
+//             return JsonUtility.ToJson(wrapper, prettyPrint);
+//         }
+//
+//         [Serializable]
+//         private class Wrapper<T>
+//         {
+//             public T[] Items;
+//         }
+//     }
+// }

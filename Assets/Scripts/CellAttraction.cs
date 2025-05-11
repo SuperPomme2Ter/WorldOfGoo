@@ -111,7 +111,7 @@ public class CellAttraction : MonoBehaviour
         {
             return Vector2.up * 1000;
         }
-        return S_GravityMap.pixelsForce[(int)transform.position.x][(int)transform.position.y];
+        return S_GravityMap.pixelsForce[(int)transform.position.x*(int)transform.position.y*256];
 
     }
 
