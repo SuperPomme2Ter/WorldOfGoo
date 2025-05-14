@@ -5,24 +5,24 @@ using UnityEngine;
 public class TransporterPathfinding : MonoBehaviour
 {
     // Start is called before the first frame update
-    BeginningCell Cell;
-    Cell actualCell;
-    Cell destinationCell;
+    //BeginningCell Cell;
+    internal Cell actualCell;
+    internal Cell destinationCell;
     float travelDistance = 1;
     float speed;
     private void Start()
     {
-        Cell = BeginningCell.instance;
-        actualCell = Cell;
-        destinationCell=Cell;
+        // actualCell = Cell;
+        // destinationCell=Cell;
         
     }
 
     private void FixedUpdate()
     {
-        if (actualCell == null || destinationCell == null)
+        
+        if (!actualCell || !destinationCell)
         {
-            actualCell = Cell;
+            actualCell = actualCell;
             ChooseANeightbour();
         }
         if (travelDistance >= 1)

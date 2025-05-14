@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class BeginningCell : Cell
 {
-    public static BeginningCell instance;
+    //public static BeginningCell instance;
     [SerializeField] public int nbTransporters;
     [SerializeField] private GameObject transportersPrefab;
     public GameObject stationPrefab;
@@ -15,17 +15,17 @@ public class BeginningCell : Cell
     public List<CellAttraction> stationsChecked;
 
     // Start is called before the first frame update
-    private void Awake()
-    {
-        if (instance == null)
-        {
-            instance = this;
-        }
-        else
-        {
-            Destroy(this.gameObject);
-        }
-    }
+    // private void Awake()
+    // {
+    //     if (instance == null)
+    //     {
+    //         instance = this;
+    //     }
+    //     else
+    //     {
+    //         Destroy(this.gameObject);
+    //     }
+    // }
     void Start()
     {
         allStations.Add(this.gameObject);

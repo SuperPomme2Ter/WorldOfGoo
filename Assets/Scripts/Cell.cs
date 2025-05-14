@@ -9,11 +9,11 @@ using static UnityEngine.RuleTile.TilingRuleOutput;
 public class Cell : MonoBehaviour
 {
     public List<GameObject> connections = new();
-    public Dictionary<SpringJoint2D, GameObject> springAndRenderer= new Dictionary<SpringJoint2D, GameObject>();
+    public Dictionary<SpringJoint2D, GameObject> springAndRenderer= new();
     public float minDistance;
     public float maxDistance;
-    public float spriteScale;
-    public Material linkMaterial;
+    //public float spriteScale;
+    [SerializeField] private GameObject linkPrefab;
     [SerializeField] private float springFrequency=1.5f;
     [Range(0,1)]
     [SerializeField] private float springDamping=1;
@@ -28,13 +28,13 @@ public class Cell : MonoBehaviour
         }
 
         SpringJoint2D newConnection = gameObject.AddComponent<SpringJoint2D>();
-        GameObject linkGameobject = Instantiate(BeginningCell.instance.linkPrefab, transform.position, Quaternion.identity,transform);
+        GameObject linkGameobject = Instantiate(linkPrefab, transform.position, Quaternion.identity,transform);
         LineRenderer connectionsLink=linkGameobject.GetComponent<LineRenderer>();
         springAndRenderer.Add(newConnection,linkGameobject);
         int spriteCount = 0;
         List<Vector3> nbPos = new List<Vector3>();
 
-            spriteCount = Mathf.CeilToInt(Vector3.Distance(anotherCell.transform.position, transform.position) / spriteScale);
+            spriteCount = Mathf.CeilToInt(Vector3.Distance(anotherCell.transform.position, transform.position) / connectionsLink.textureScale.x);
 
             for (int i = 0; i < spriteCount; i++)
             {
@@ -43,7 +43,7 @@ public class Cell : MonoBehaviour
         connectionsLink.positionCount = nbPos.Count;
         connectionsLink.SetPositions(nbPos.ToArray());
         if (connectionsLink.material != null)
-            connectionsLink.material.mainTextureScale = new Vector2(spriteScale * spriteCount, 1);
+            connectionsLink.material.mainTextureScale = new Vector2(connectionsLink.textureScale.x * spriteCount, 1);
         else
             Debug.LogError(name + "'s Line Renderer has no material!");
         newConnection.connectedBody = anotherCell.GetComponent<Rigidbody2D>();

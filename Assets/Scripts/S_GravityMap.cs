@@ -48,6 +48,7 @@ public class S_GravityMap : MonoBehaviour
                     pixelArray[i*height + j] = new float[2] { pixelsForce[i*height + j].x, pixelsForce[i*height + j].y };
                 }
             }
+            
 
             string pixelDataJson = JsonConvert.SerializeObject(pixelArray);
             

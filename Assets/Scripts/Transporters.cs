@@ -1,11 +1,12 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class Transporters : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IDragHandler
 {
-    BeginningCell Cell;
     float distMax;
     List<GameObject> nearbyStations=new List<GameObject>();
     [SerializeField] List<GameObject> pivots=new List<GameObject>();
@@ -16,12 +17,20 @@ public class Transporters : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     CircleCollider2D detectionRange;
     Vector3 originalPosition;
     TransporterPathfinding pathfinding;
+    
+    internal event Action<Vector3> DeployTransporter;
 
+    
     void Start()
     {
-        pathfinding=GetComponent<TransporterPathfinding>();
-        Cell=BeginningCell.instance;
-        distMax=Cell.maxDistance;
+        pathfinding = GetComponent<TransporterPathfinding>();
+    }
+
+    internal void SetSpawnCell(Cell spawnCell)
+    {
+        _ = spawnCell ?? throw new InvalidOperationException("SpawnCell cannot be null, transporter not happy");
+        pathfinding.actualCell=spawnCell;
+        pathfinding.destinationCell=spawnCell;
     }
     
     public void OnDrag(PointerEventData eventData)
@@ -85,8 +94,8 @@ public class Transporters : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
 
             if (col is BoxCollider2D && Vector2.Distance(col.gameObject.transform.position, transform.position) < distMax)
             {
-                GameObject cell = Instantiate(Cell.stationPrefab, transform.position, Quaternion.identity,BeginningCell.instance.stationParent.transform);
-                BeginningCell.instance.nbTransporters -= 1;
+                DeployTransporter?.Invoke(transform.position);
+                //GameObject cell = Instantiate(Cell.stationPrefab, transform.position, Quaternion.identity,BeginningCell.instance.stationParent.transform);
                 Destroy(gameObject);
                 return;
                 
