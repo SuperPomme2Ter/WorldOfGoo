@@ -12,7 +12,7 @@ public class StationManager : MonoBehaviour
     public GameObject linkPrefab;    
     public List<GameObject> allStations = new();
     public List<CellAttraction> stationsChecked;
-    public event Action OnStationCreated;
+    public event Action<List<GameObject>,CellAttraction> OnStationCreated;
 
     // Start is called before the first frame update
     // private void Awake()
@@ -36,6 +36,7 @@ public class StationManager : MonoBehaviour
         GameObject cell = Instantiate(stationPrefab, transform.position, Quaternion.identity,transform);
         cell.GetComponent<StationCell>().StationInit(allStations);
         UpdateStationList();
+        OnStationCreated?.Invoke(allStations, cell.GetComponent<CellAttraction>());
         return;
     }
 

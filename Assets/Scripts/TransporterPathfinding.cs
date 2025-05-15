@@ -22,7 +22,6 @@ public class TransporterPathfinding : MonoBehaviour
         
         if (!actualCell || !destinationCell)
         {
-            actualCell = actualCell;
             ChooseANeightbour();
         }
         if (travelDistance >= 1)

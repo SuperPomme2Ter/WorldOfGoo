@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -30,9 +31,16 @@ public class CellAttraction : MonoBehaviour
     private GameObject actualPixel;
     
     [SerializeField] StationCell stationCell;
-    List<StationCell> neightbourCells = new();
+    //public bool 
+    List<CellAttraction> neightbourCells = new();
     private int updateCount = 0;
     [SerializeField] private int helpDirectionAngleMax = 30;
+    
+    /// <summary>
+    /// First argument is the other station you want to call for help
+    /// second argument is this station
+    /// </summary>
+    public event Action<CellAttraction,CellAttraction> OnCallHelp;
     
 
     
@@ -117,14 +125,15 @@ public class CellAttraction : MonoBehaviour
 
     public void HelpSignal(Vector2 excessDirection)
     {
-        Debug.Log($"Help launched for {gameObject.name}");
+        //Debug.Log($"Help launched for {gameObject.name}");
         for (int i = 0; i < stationCell.connections.Count; i++)
         {
-            if (!stationCell.connections[i].TryGetComponent<StationCell>(out StationCell otherCell))
+            if (!stationCell.connections[i].TryGetComponent(out CellAttraction otherCell))
             {
                 continue;
             }
-            if (BeginningCell.instance.HelpListHandling(otherCell.GetComponent<CellAttraction>()))
+            OnCallHelp?.Invoke(otherCell, this);
+            if (BeginningCell.instance.HelpListHandling(otherCell))
             {
                 neightbourCells.Add(otherCell);
             }
@@ -137,7 +146,7 @@ public class CellAttraction : MonoBehaviour
         CellAttraction otherCellAttraction=null;
         for (int i = 0; i < neightbourCells.Count; i++)
         {
-            otherCellAttraction= neightbourCells[i].GetComponent<CellAttraction>();
+            otherCellAttraction= neightbourCells[i];
             if (Vector2.Angle(excessAttraction,otherCellAttraction.Thrust) < helpDirectionAngleMax)
             {
                 otherCellAttraction.supportThrust = excessDirection;

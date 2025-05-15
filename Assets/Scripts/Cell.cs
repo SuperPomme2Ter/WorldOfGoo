@@ -9,7 +9,7 @@ using static UnityEngine.RuleTile.TilingRuleOutput;
 public class Cell : MonoBehaviour
 {
     public List<GameObject> connections = new();
-    public Dictionary<SpringJoint2D, GameObject> springAndRenderer= new();
+    public Dictionary<SpringJoint2D, LinkUpdater> springAndRenderer= new();
     public float minDistance;
     public float maxDistance;
     //public float spriteScale;
@@ -30,7 +30,7 @@ public class Cell : MonoBehaviour
         SpringJoint2D newConnection = gameObject.AddComponent<SpringJoint2D>();
         GameObject linkGameobject = Instantiate(linkPrefab, transform.position, Quaternion.identity,transform);
         LineRenderer connectionsLink=linkGameobject.GetComponent<LineRenderer>();
-        springAndRenderer.Add(newConnection,linkGameobject);
+        springAndRenderer.Add(newConnection,linkGameobject.GetComponent<LinkUpdater>());
         int spriteCount = 0;
         List<Vector3> nbPos = new List<Vector3>();
 
@@ -61,10 +61,14 @@ public class Cell : MonoBehaviour
     }
     private void Update()
     {
-        foreach (SpringJoint2D springs in GetComponents<SpringJoint2D>())
+        foreach (var springs in springAndRenderer.Keys)
         {
-            if(springAndRenderer.TryGetValue(springs,out GameObject child))
-            child.GetComponent<LinkUpdater>().CreateLine();
+            if(springAndRenderer.TryGetValue(springs,out LinkUpdater updater))
+            {
+                updater.CreateLine();
+            }
         }
+
+        
     }
 }
